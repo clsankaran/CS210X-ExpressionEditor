@@ -1,4 +1,4 @@
-public class LiteralExpression extends Expression {
+public class LiteralExpression implements Expression {
 
     private CompoundExpression _parent;
     private String _value;
@@ -37,7 +37,7 @@ public class LiteralExpression extends Expression {
      * c itself will be removed. This method modifies the expression itself.
      */
     public void flatten (){
-        
+
     }
 
     /**
