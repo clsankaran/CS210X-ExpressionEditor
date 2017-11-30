@@ -6,7 +6,6 @@
  * X := (E) | L
  * L := [0-9]+ | [a-z]
  */
-
 public class SimpleExpressionParser implements ExpressionParser {
 	/*
 	 * Attempts to create an expression tree -- flattened as much as possible -- from the specified String.
