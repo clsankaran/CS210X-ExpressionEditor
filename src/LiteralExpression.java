@@ -47,8 +47,11 @@ public class LiteralExpression implements Expression {
      * @return a String representation of the expression tree.
      */
     public String convertToString (int indentLevel){
-        // TODO: Implement This
-        return null;
+        String converted = _value.toString();
+        for(int i = 0; i < indentLevel; i++){
+            converted = "\t" + converted;
+        }
+        return(converted);
     }
 
     /**
