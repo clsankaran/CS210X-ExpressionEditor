@@ -1,7 +1,7 @@
 public class LiteralExpression implements Expression {
 
     private CompoundExpression _parent;
-    private String _value;
+    private Character _value;
 
     /**
      * Returns the expression's parent.
@@ -37,7 +37,7 @@ public class LiteralExpression implements Expression {
      * c itself will be removed. This method modifies the expression itself.
      */
     public void flatten (){
-
+        // No flatten method necessary because Literal expressions have no children.
     }
 
     /**
