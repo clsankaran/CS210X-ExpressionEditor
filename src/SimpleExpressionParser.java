@@ -49,7 +49,7 @@ public class SimpleExpressionParser implements ExpressionParser {
 	}
 
 	private boolean parseA(String str) {
-		int idxOfPlus = 
+		int idxOfPlus =
 	}
 	
 	private boolean parseM(String str) {
