@@ -30,7 +30,7 @@ public class LiteralExpression implements Expression {
      */
     public Expression deepCopy (){
         LiteralExpression copy = new LiteralExpression(_value);
-        
+        copy.setParent(this.getParent());
         return copy;
     }
 
