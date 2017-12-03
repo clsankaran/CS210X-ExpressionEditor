@@ -65,6 +65,6 @@ public class AbstractCompoundExpression implements CompoundExpression {
     }
 
     public void addSubexpression (Expression subexpression){
-        
+
     }
 }
