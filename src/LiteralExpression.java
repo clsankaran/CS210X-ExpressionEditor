@@ -1,9 +1,9 @@
 public class LiteralExpression implements Expression {
 
     private CompoundExpression _parent;
-    private char _value;
+    private String _value;
 
-    public LiteralExpression(char value){
+    public LiteralExpression(String value){
         _value = value;
     }
     /**
@@ -30,7 +30,7 @@ public class LiteralExpression implements Expression {
      */
     public Expression deepCopy (){
         LiteralExpression copy = new LiteralExpression(_value);
-        
+        copy.setParent(this.getParent());
         return copy;
     }
 
@@ -52,7 +52,7 @@ public class LiteralExpression implements Expression {
      * @return a String representation of the expression tree.
      */
     public String convertToString (int indentLevel){
-        String converted = "" + _value;
+        String converted = _value;
         for(int i = 0; i < indentLevel; i++){
             converted = "\t" + converted;
         }
