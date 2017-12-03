@@ -1,5 +1,3 @@
 public abstract class SimpleCompoundExpression extends AbstractCompoundExpression {
-    public void flatten (){
-
-    }
+    public abstract void flatten ();
 }
