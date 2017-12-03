@@ -1,7 +1,7 @@
 public class LiteralExpression implements Expression {
 
     private CompoundExpression _parent;
-    private Character _value;
+    private Character _value; 
 
     /**
      * Returns the expression's parent.
