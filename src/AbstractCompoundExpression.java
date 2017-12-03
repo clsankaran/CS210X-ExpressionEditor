@@ -1,5 +1,6 @@
 import java.util.*;
-public class AbstractCompoundExpression implements CompoundExpression {
+public abstract class AbstractCompoundExpression implements CompoundExpression {
+
     private CompoundExpression _parent;
     private ArrayList<Expression> _children;
     private Character _value;
@@ -37,9 +38,7 @@ public class AbstractCompoundExpression implements CompoundExpression {
      * child c is of the same type as x, the children of c will be added to x, and
      * c itself will be removed. This method modifies the expression itself.
      */
-    public void flatten (){
-        // No flatten method necessary because Literal expressions have no children.
-    }
+    public abstract void flatten ();
 
     /**
      * Creates a String representation by recursively printing out (using indentation) the
