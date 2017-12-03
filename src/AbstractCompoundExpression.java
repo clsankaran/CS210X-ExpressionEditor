@@ -1,6 +1,7 @@
-public class LiteralExpression implements Expression {
-
+import java.util.*;
+public class AbstractCompoundExpression implements CompoundExpression {
     private CompoundExpression _parent;
+    private ArrayList<Expression> _children;
     private Character _value;
 
     /**
@@ -63,4 +64,7 @@ public class LiteralExpression implements Expression {
         }
     }
 
+    public void addSubexpression (Expression subexpression){
+        
+    }
 }
