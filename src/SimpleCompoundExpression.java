@@ -7,15 +7,11 @@ public class SimpleCompoundExpression extends AbstractCompoundExpression {
         _operation = operation;
     }
 
-    public String getOperation (){
-        return _operation;
-    }
-
     public void flatten () {
         for(Expression e : this.getChildren()) {
             e.flatten();
             if (e.getClass() == this.getClass()){
-                if(this._operation.equals(((SimpleCompoundExpression) e).getOperation())){
+                if(this._operation.equals(((SimpleCompoundExpression) e)._operation)){
                     for(Expression c : ((SimpleCompoundExpression) e).getChildren()){
                         this.addSubexpression(c);
                     }
@@ -27,7 +23,13 @@ public class SimpleCompoundExpression extends AbstractCompoundExpression {
 
 	@Override
 	public String convertToString(int indentLevel) {
-		// TODO Auto-generated method stub
-		return null;
+        String converted = _operation;
+        for(int i = 0; i < indentLevel; i++){
+            converted = "\t" + converted;
+        }
+        for(Expression e : this.getChildren()) {
+            converted = converted + "\n" + e.convertToString(indentLevel);
+        }
+        return(converted);
 	}
 }
