@@ -40,6 +40,6 @@ public class SimpleCompoundExpression extends AbstractCompoundExpression {
 		for (Expression e : this.getChildren()) {
 			((AbstractCompoundExpression) copy).addSubexpression(e.deepCopy());
 		}
-		return copy; 
+		return copy;
 	}
 }
