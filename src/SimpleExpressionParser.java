@@ -35,33 +35,44 @@ public class SimpleExpressionParser implements ExpressionParser {
 
 	protected Expression parseExpression(String str) {
 		Expression expression;
-
+		if (parseEBoolean(str)) {
+			return parseE(str);
+		}
 		// TODO implement me
 		return null;
 	}
 
-	private boolean parseE(String str) {
-		if (parseA(str) || parseX(str)) {
+	private String parseE(String str) {
+		if (parseABoolean(str)) {
+			return parseA(str);
+		} else { //parseXBoolean
+			return parseX(str);
+		}
+	}
+	
+	private boolean parseEBoolean(String str) {
+		if (parseABoolean(str) || parseXBoolean(str)) {
 			return true;
 		} else {
 			return false;
 		}
 	}
+	
 
-	private boolean parseA(String str) {
-		int idxOfPlus =
+	private boolean parseABoolean(String str) {
+		return true;
 	}
 	
-	private boolean parseM(String str) {
-		
+	private boolean parseMBoolean(String str) {
+		return true;
 	}
 
-	private boolean parseX(String str) {
-		
+	private boolean parseXBoolean(String str) {
+		return true;
 	}
 	
-	private boolean parseL(String str) {
-		
+	private boolean parseLBoolean(String str) {
+		return true;
 	}
 	
 

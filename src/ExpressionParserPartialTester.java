@@ -17,6 +17,7 @@ public class ExpressionParserPartialTester {
 	public void setUp () throws IOException {
 		_parser = new SimpleExpressionParser();
 	}
+	
 
 	@Test
 	/**
