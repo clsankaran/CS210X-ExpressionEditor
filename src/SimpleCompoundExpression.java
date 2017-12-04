@@ -33,4 +33,12 @@ public class SimpleCompoundExpression extends AbstractCompoundExpression {
 		}
 		return (converted);
 	}
+
+	public Expression deepCopy() {
+		final Expression copy = new SimpleCompoundExpression(_operation);
+		for (Expression e : this.getChildren()) {
+			((AbstractCompoundExpression) copy).addSubexpression(e.deepCopy());
+		}
+		return copy;
+	}
 }

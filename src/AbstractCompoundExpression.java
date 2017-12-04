@@ -45,9 +45,7 @@ public abstract class AbstractCompoundExpression implements CompoundExpression {
 	 * 
 	 * @return the deep copy
 	 */
-	public Expression deepCopy() {
-		return this;
-	}
+	public abstract Expression deepCopy();
 
 	/**
 	 * Recursively flattens the expression as much as possible throughout the entire

@@ -19,4 +19,12 @@ public class ParentheticalExpression extends AbstractCompoundExpression {
 		return (converted);
 	}
 
+	public Expression deepCopy() {
+		final Expression copy = new ParentheticalExpression();
+		for (Expression e : this.getChildren()) {
+			((AbstractCompoundExpression) copy).addSubexpression(e.deepCopy());
+		}
+		return copy;
+	}
+
 }

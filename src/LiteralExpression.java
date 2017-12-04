@@ -42,9 +42,7 @@ public class LiteralExpression implements Expression {
 	 * @return the deep copy
 	 */
 	public Expression deepCopy() {
-		LiteralExpression copy = new LiteralExpression(_value);
-		copy.setParent(this.getParent());
-		return copy;
+		return new LiteralExpression(_value);
 	}
 
 	/**
