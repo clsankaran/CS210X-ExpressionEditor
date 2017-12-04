@@ -3,7 +3,7 @@ public abstract class AbstractCompoundExpression implements CompoundExpression {
 
     private CompoundExpression _parent;
     private ArrayList<Expression> _children;
-    private Character _operation;
+    
 
     /**
      * Returns the expression's parent.
