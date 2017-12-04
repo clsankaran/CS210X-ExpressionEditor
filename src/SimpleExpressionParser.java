@@ -54,7 +54,7 @@ public class SimpleExpressionParser implements ExpressionParser {
 		while (idxOfPlus > 0) { // try each +
 			if (parseA(str.substring(0, idxOfPlus)) != null && parseM(str.substring(idxOfPlus+1)) != null) {
 				 result = new SimpleCompoundExpression("+");
-				 result.addSubexpression(parseA(str.substring(0, idxOfPlus)));
+				 ((AbstractCompoundExpression) result).addSubexpression(parseA(str.substring(0, idxOfPlus)));
 			}
 		}
 	}

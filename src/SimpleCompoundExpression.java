@@ -23,4 +23,10 @@ public class SimpleCompoundExpression extends AbstractCompoundExpression {
             }
         }
     }
+
+	@Override
+	public String convertToString(int indentLevel) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
