@@ -53,24 +53,10 @@ public abstract class AbstractCompoundExpression implements CompoundExpression {
      * @param indentLevel the indentation level (number of tabs from the left margin) at which to start
      * @return a String representation of the expression tree.
      */
-    public String convertToString (int indentLevel){
-        // TODO: Implement This
-        return null;
-    }
-
-    /**
-     * Static helper method to indent a specified number of times from the left margin, by
-     * appending tab characters to teh specified StringBuffer.
-     * @param sb the StringBuffer to which to append tab characters.
-     * @param indentLevel the number of tabs to append.
-     */
-    public static void indent (StringBuffer sb, int indentLevel) {
-        for (int i = 0; i < indentLevel; i++) {
-            sb.append('\t');
-        }
-    }
+    public abstract String convertToString (int indentLevel);
 
     public void addSubexpression (Expression subexpression){
         _children.add(subexpression);
+        subexpression.setParent(this);
     }
 }
