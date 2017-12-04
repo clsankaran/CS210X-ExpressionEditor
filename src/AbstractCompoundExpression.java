@@ -3,7 +3,6 @@ public abstract class AbstractCompoundExpression implements CompoundExpression {
 
     private CompoundExpression _parent;
     private ArrayList<Expression> _children;
-    
 
     /**
      * Returns the expression's parent.
@@ -11,6 +10,14 @@ public abstract class AbstractCompoundExpression implements CompoundExpression {
      */
     public CompoundExpression getParent (){
         return _parent;
+    }
+
+    /**
+     * Returns the expression's parent.
+     * @return the expression's parent
+     */
+    public ArrayList<Expression> getChildren (){
+        return _children;
     }
 
     /**
@@ -64,6 +71,6 @@ public abstract class AbstractCompoundExpression implements CompoundExpression {
     }
 
     public void addSubexpression (Expression subexpression){
-
+        _children.add(subexpression);
     }
 }

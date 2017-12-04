@@ -1,11 +1,22 @@
 public class LiteralExpression implements Expression {
 
+    // instance variables
     private CompoundExpression _parent;
     private String _value;
 
+    /**
+     * Constructs a literal expression
+     */
+    public LiteralExpression(){ }
+
+    /**
+     * Constructs a literal expression
+     * @param value the value of the expression [0,9]+ | [a,z]
+     */
     public LiteralExpression(String value){
         _value = value;
     }
+
     /**
      * Returns the expression's parent.
      * @return the expression's parent
@@ -57,18 +68,6 @@ public class LiteralExpression implements Expression {
             converted = "\t" + converted;
         }
         return(converted);
-    }
-
-    /**
-     * Static helper method to indent a specified number of times from the left margin, by
-     * appending tab characters to teh specified StringBuffer.
-     * @param sb the StringBuffer to which to append tab characters.
-     * @param indentLevel the number of tabs to append.
-     */
-    public static void indent (StringBuffer sb, int indentLevel) {
-        for (int i = 0; i < indentLevel; i++) {
-            sb.append('\t');
-        }
     }
 
 }
