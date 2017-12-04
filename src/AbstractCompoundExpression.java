@@ -59,4 +59,8 @@ public abstract class AbstractCompoundExpression implements CompoundExpression {
         _children.add(subexpression);
         subexpression.setParent(this);
     }
+
+    public void removeSubexpression (Expression subexpression){
+        _children.remove(subexpression);
+    }
 }

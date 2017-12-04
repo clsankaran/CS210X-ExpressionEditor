@@ -12,14 +12,15 @@ public class SimpleCompoundExpression extends AbstractCompoundExpression {
     }
 
     public void flatten () {
-        Boolean sameType = true;
         for(Expression e : this.getChildren()) {
+            e.flatten();
             if (e.getClass() == this.getClass()){
-                if(!this._operation.equals(((SimpleCompoundExpression) e).getOperation())){
-                    sameType = false;
+                if(this._operation.equals(((SimpleCompoundExpression) e).getOperation())){
+                    for(Expression c : ((SimpleCompoundExpression) e).getChildren()){
+                        this.addSubexpression(c);
+                    }
+                    this.removeSubexpression(e);
                 }
-            } else if (){
-
             }
         }
     }
