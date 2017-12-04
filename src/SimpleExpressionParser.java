@@ -39,27 +39,76 @@ public class SimpleExpressionParser implements ExpressionParser {
 	}
 
 	private Expression parseE(String str) {
-		Expression result;
 		if (parseA(str) != null) {
-			result = parseA(str);
+			return parseA(str);
 		} else if (parseX(str) != null){ //parseXBoolean
-			result = parseX(str);
+			return parseX(str);
 		}
-		return result;
+		return null;
 	}
 	
 	private Expression parseA(String str) {
-		Expression result;
+		// try A + M
 		int idxOfPlus = str.indexOf('+');
 		while (idxOfPlus > 0) { // try each +
 			if (parseA(str.substring(0, idxOfPlus)) != null && parseM(str.substring(idxOfPlus+1)) != null) {
-				 result = new SimpleCompoundExpression("+");
+				 Expression result = new SimpleCompoundExpression("+");
 				 ((AbstractCompoundExpression) result).addSubexpression(parseA(str.substring(0, idxOfPlus)));
+				 ((AbstractCompoundExpression) result).addSubexpression(parseA(str.substring(idxOfPlus + 1)));
+				 return result;
 			}
+			idxOfPlus = str.indexOf('+', idxOfPlus + 1);
 		}
+		// try M
+		if (parseM(str) != null) {
+			return parseM(str);
+		}
+		return null;
 	}
 	
+	private Expression parseM(String str) {
+		// try M * M
+		int idxOfTimes = str.indexOf('*');
+		while (idxOfTimes > 0) { // try each +
+			if (parseA(str.substring(0, idxOfTimes)) != null && parseM(str.substring(idxOfTimes+1)) != null) {
+				 Expression result = new SimpleCompoundExpression("+");
+				 ((AbstractCompoundExpression) result).addSubexpression(parseM(str.substring(0, idxOfTimes)));
+				 ((AbstractCompoundExpression) result).addSubexpression(parseM(str.substring(idxOfTimes + 1)));
+				 return result;
+			}
+			idxOfTimes = str.indexOf('+', idxOfTimes + 1);
+		}
+		// try X
+		if (parseX(str) != null) {
+			return parseX(str);
+		}
+		return null;
+	}
 	
+	private Expression parseX(String str) {
+		// try (E)
+		if (str.startsWith("(") && str.endsWith(")") && parseE(str.substring(0,str.length())) != null) {
+			Expression result = new ParentheticalExpression();
+			((AbstractCompoundExpression) result).addSubexpression(parseE(str.substring(0,str.length())));
+			return result;
+		} 
+		// try L
+		if (parseL(str) != null) {
+			return parseL(str);
+		}
+		return null;
+	}
 	
-
+	private Expression parseL(String str) {
+		// try [0-9]+
+		try {
+			Integer.parseInt(str);
+			return new LiteralExpression(str);
+		} catch (Exception e) {}
+		// try [a-z]
+		if (str.length()==1 && str.equals(str.toLowerCase())) {
+			return new LiteralExpression(str);
+		}
+		return null;
+	}
 }
