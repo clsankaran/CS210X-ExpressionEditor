@@ -13,8 +13,9 @@ public class ParentheticalExpression extends AbstractCompoundExpression {
 		for (int i = 0; i < indentLevel; i++) {
 			converted = "\t" + converted;
 		}
+        converted = converted + "\n";
 		for (Expression e : this.getChildren()) {
-			converted = converted + "\n" + e.convertToString(indentLevel + 1);
+			converted = converted + e.convertToString(indentLevel + 1);
 		}
 		return (converted);
 	}

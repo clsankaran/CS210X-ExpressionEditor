@@ -71,6 +71,7 @@ public class LiteralExpression implements Expression {
 		for (int i = 0; i < indentLevel; i++) {
 			converted = "\t" + converted;
 		}
+		converted = converted + "\n";
 		return (converted);
 	}
 
