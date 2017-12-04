@@ -3,12 +3,7 @@ public class LiteralExpression implements Expression {
     // instance variables
     private CompoundExpression _parent;
     private String _value;
-
-    /**
-     * Constructs a literal expression
-     */
-    public LiteralExpression(){ }
-
+    
     /**
      * Constructs a literal expression
      * @param value the value of the expression [0,9]+ | [a,z]
