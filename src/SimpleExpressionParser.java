@@ -33,47 +33,33 @@ public class SimpleExpressionParser implements ExpressionParser {
 		return expression;
 	}
 
-	protected Expression parseExpression(String str) {
+	private Expression parseExpression(String str) {
 		Expression expression;
-		if (parseEBoolean(str)) {
-			return parseE(str);
-		}
-		// TODO implement me
-		return null;
+		return parseE(str);
 	}
 
-	private String parseE(String str) {
-		if (parseABoolean(str)) {
-			return parseA(str);
-		} else { //parseXBoolean
-			return parseX(str);
+	private Expression parseE(String str) {
+		Expression result;
+		if (parseA(str) != null) {
+			result = parseA(str);
+		} else if (parseX(str) != null){ //parseXBoolean
+			result = parseX(str);
+		}
+		return result;
+	}
+	
+	private Expression parseA(String str) {
+		Expression result;
+		int idxOfPlus = str.indexOf('+');
+		while (idxOfPlus > 0) { // try each +
+			if (parseA(str.substring(0, idxOfPlus)) != null && parseM(str.substring(idxOfPlus+1)) != null) {
+				 result = new SimpleCompoundExpression("+");
+				 result.addSubexpression(parseA(str.substring(0, idxOfPlus)));
+			}
 		}
 	}
 	
-	private boolean parseEBoolean(String str) {
-		if (parseABoolean(str) || parseXBoolean(str)) {
-			return true;
-		} else {
-			return false;
-		}
-	}
 	
-
-	private boolean parseABoolean(String str) {
-		return true;
-	}
-	
-	private boolean parseMBoolean(String str) {
-		return true;
-	}
-
-	private boolean parseXBoolean(String str) {
-		return true;
-	}
-	
-	private boolean parseLBoolean(String str) {
-		return true;
-	}
 	
 
 }
