@@ -2,8 +2,11 @@ import java.util.*;
 public abstract class AbstractCompoundExpression implements CompoundExpression {
 
     private CompoundExpression _parent;
-    private ArrayList<Expression> _children;
+    private List<Expression> _children;
 
+    protected AbstractCompoundExpression() {
+    		_children = new ArrayList<Expression>();
+    }
     /**
      * Returns the expression's parent.
      * @return the expression's parent
@@ -16,7 +19,7 @@ public abstract class AbstractCompoundExpression implements CompoundExpression {
      * Returns the expression's parent.
      * @return the expression's parent
      */
-    public ArrayList<Expression> getChildren (){
+    public List<Expression> getChildren (){
         return _children;
     }
 

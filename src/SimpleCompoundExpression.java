@@ -3,7 +3,8 @@ public class SimpleCompoundExpression extends AbstractCompoundExpression {
     // instance variable
     private String _operation;
 
-    public SimpleCompoundExpression(String operation){
+    public SimpleCompoundExpression(String operation) {
+    		super();
         _operation = operation;
     }
 
@@ -28,7 +29,7 @@ public class SimpleCompoundExpression extends AbstractCompoundExpression {
             converted = "\t" + converted;
         }
         for(Expression e : this.getChildren()) {
-            converted = converted + "\n" + e.convertToString(indentLevel);
+            converted = converted + "\n" + e.convertToString(indentLevel+1);
         }
         return(converted);
 	}

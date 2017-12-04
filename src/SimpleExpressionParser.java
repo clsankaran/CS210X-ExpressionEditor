@@ -34,14 +34,13 @@ public class SimpleExpressionParser implements ExpressionParser {
 	}
 
 	private Expression parseExpression(String str) {
-		Expression expression;
 		return parseE(str);
 	}
 
 	private Expression parseE(String str) {
 		if (parseA(str) != null) {
 			return parseA(str);
-		} else if (parseX(str) != null){ //parseXBoolean
+		} else if (parseX(str) != null){ 
 			return parseX(str);
 		}
 		return null;
@@ -52,9 +51,9 @@ public class SimpleExpressionParser implements ExpressionParser {
 		int idxOfPlus = str.indexOf('+');
 		while (idxOfPlus > 0) { // try each +
 			if (parseA(str.substring(0, idxOfPlus)) != null && parseM(str.substring(idxOfPlus+1)) != null) {
-				 Expression result = new SimpleCompoundExpression("+");
+				Expression result = new SimpleCompoundExpression("+");
 				 ((AbstractCompoundExpression) result).addSubexpression(parseA(str.substring(0, idxOfPlus)));
-				 ((AbstractCompoundExpression) result).addSubexpression(parseA(str.substring(idxOfPlus + 1)));
+				 ((AbstractCompoundExpression) result).addSubexpression(parseM(str.substring(idxOfPlus + 1)));
 				 return result;
 			}
 			idxOfPlus = str.indexOf('+', idxOfPlus + 1);
@@ -69,9 +68,9 @@ public class SimpleExpressionParser implements ExpressionParser {
 	private Expression parseM(String str) {
 		// try M * M
 		int idxOfTimes = str.indexOf('*');
-		while (idxOfTimes > 0) { // try each +
-			if (parseA(str.substring(0, idxOfTimes)) != null && parseM(str.substring(idxOfTimes+1)) != null) {
-				 Expression result = new SimpleCompoundExpression("+");
+		while (idxOfTimes > 0) { // try each *
+			if (parseM(str.substring(0, idxOfTimes)) != null && parseM(str.substring(idxOfTimes+1)) != null) {
+				 Expression result = new SimpleCompoundExpression("*");
 				 ((AbstractCompoundExpression) result).addSubexpression(parseM(str.substring(0, idxOfTimes)));
 				 ((AbstractCompoundExpression) result).addSubexpression(parseM(str.substring(idxOfTimes + 1)));
 				 return result;
@@ -87,9 +86,9 @@ public class SimpleExpressionParser implements ExpressionParser {
 	
 	private Expression parseX(String str) {
 		// try (E)
-		if (str.startsWith("(") && str.endsWith(")") && parseE(str.substring(0,str.length())) != null) {
+		if (str.startsWith("(") && str.endsWith(")") && parseE(str.substring(1,str.length()-1)) != null) {
 			Expression result = new ParentheticalExpression();
-			((AbstractCompoundExpression) result).addSubexpression(parseE(str.substring(0,str.length())));
+			((AbstractCompoundExpression) result).addSubexpression(parseE(str.substring(1,str.length()-1)));
 			return result;
 		} 
 		// try L
