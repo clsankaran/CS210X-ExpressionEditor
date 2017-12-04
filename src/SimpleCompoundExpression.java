@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class SimpleCompoundExpression extends AbstractCompoundExpression {
 
 	// instance variable
@@ -9,16 +11,24 @@ public class SimpleCompoundExpression extends AbstractCompoundExpression {
 	}
 
 	public void flatten() {
+        ArrayList<Expression> toAdd = new ArrayList<Expression>();
+        ArrayList<SimpleCompoundExpression> toRemove = new ArrayList<SimpleCompoundExpression>();
 		for (Expression e : this.getChildren()) {
 			e.flatten();
 			if (e.getClass() == this.getClass()) {
 				if (this._operation.equals(((SimpleCompoundExpression) e)._operation)) {
 					for (Expression c : ((SimpleCompoundExpression) e).getChildren()) {
-						this.addSubexpression(c);
+						toAdd.add(c);
 					}
-					this.removeSubexpression(e);
+					toRemove.add((SimpleCompoundExpression) e);
 				}
 			}
+		}
+		for (SimpleCompoundExpression r : toRemove){
+			this.removeSubexpression(r);
+		}
+		for (Expression a : toAdd){
+			this.addSubexpression(a);
 		}
 	}
 

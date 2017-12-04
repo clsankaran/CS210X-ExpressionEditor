@@ -1,6 +1,9 @@
 public class ParentheticalExpression extends AbstractCompoundExpression {
 
 	public void flatten() {
+        for (Expression e : this.getChildren()) {
+            e.flatten();
+        }
 	}
 
 	public ParentheticalExpression() {
