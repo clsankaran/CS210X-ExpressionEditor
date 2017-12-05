@@ -19,7 +19,7 @@ public class SimpleCompoundExpression extends AbstractCompoundExpression {
 	 * Method that flattens the expression tree.
 	 */
 	public void flatten() {
-        ArrayList<Expression> toAdd = new ArrayList<Expression>();
+        final ArrayList<Expression> toAdd = new ArrayList<Expression>();
 		for (Expression e : this.getChildren()) {
 			e.flatten(); // recursively call flatten on children
 			if (e.getClass() == this.getClass()) { // Check if children is a SimpleCompoundExpression

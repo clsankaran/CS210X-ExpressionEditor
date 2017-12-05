@@ -9,9 +9,11 @@ public class SimpleExpressionParser implements ExpressionParser {
 	 * from the specified String. Throws a ExpressionParseException if the specified
 	 * string cannot be parsed.
 	 * 
-	 * @param str the string to parse into an expression tree
+	 * @param str
+	 *            the string to parse into an expression tree
 	 * 
-	 * @param withJavaFXControls you can just ignore this variable for R1
+	 * @param withJavaFXControls
+	 *            you can just ignore this variable for R1
 	 * 
 	 * @return the Expression object representing the parsed expression tree
 	 */
@@ -47,7 +49,7 @@ public class SimpleExpressionParser implements ExpressionParser {
 		int idxOfPlus = str.indexOf('+');
 		while (idxOfPlus > 0) { // try each +
 			if (parseA(str.substring(0, idxOfPlus)) != null && parseM(str.substring(idxOfPlus + 1)) != null) {
-				Expression result = new SimpleCompoundExpression("+");
+				final Expression result = new SimpleCompoundExpression("+");
 				((AbstractCompoundExpression) result).addSubexpression(parseA(str.substring(0, idxOfPlus)));
 				((AbstractCompoundExpression) result).addSubexpression(parseM(str.substring(idxOfPlus + 1)));
 				return result;
@@ -66,7 +68,7 @@ public class SimpleExpressionParser implements ExpressionParser {
 		int idxOfTimes = str.indexOf('*');
 		while (idxOfTimes > 0) { // try each *
 			if (parseM(str.substring(0, idxOfTimes)) != null && parseM(str.substring(idxOfTimes + 1)) != null) {
-				Expression result = new SimpleCompoundExpression("*");
+				final Expression result = new SimpleCompoundExpression("*");
 				((AbstractCompoundExpression) result).addSubexpression(parseM(str.substring(0, idxOfTimes)));
 				((AbstractCompoundExpression) result).addSubexpression(parseM(str.substring(idxOfTimes + 1)));
 				return result;
@@ -83,7 +85,7 @@ public class SimpleExpressionParser implements ExpressionParser {
 	private Expression parseX(String str) {
 		// try (E)
 		if (str.startsWith("(") && str.endsWith(")") && parseE(str.substring(1, str.length() - 1)) != null) {
-			Expression result = new ParentheticalExpression();
+			final Expression result = new ParentheticalExpression();
 			((AbstractCompoundExpression) result).addSubexpression(parseE(str.substring(1, str.length() - 1)));
 			return result;
 		}

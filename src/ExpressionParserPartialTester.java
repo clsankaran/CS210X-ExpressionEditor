@@ -129,15 +129,27 @@ public class ExpressionParserPartialTester {
 	 */
 	public void deepCopy() throws ExpressionParseException {
 		final String expressionStr = "4*(z+5*x)";
-		final String parseTreeStr = "·\n\t4\n\t()\n\t\t+\n\t\t\tz\n\t\t\t·\n\t\t\t\t5\n\t\t\t\tx\n";
 		final Expression original = _parser.parse(expressionStr, false);
 		final Expression copy = original.deepCopy();
-		assertEquals(parseTreeStr, _parser.parse(expressionStr, false).convertToString(0).replace('*', '·'));
+		assertEquals(original, original);
+		assertEquals(copy, copy);
 		assertNotEquals(original, copy); // copy and original shouldn't have same reference
+		/*
+		 * following test works (as it should) when _value is public
+		 * assertEquals(((LiteralExpression) ((AbstractCompoundExpression)
+		 * original).getChildren().get(0))._value, ((LiteralExpression)
+		 * ((AbstractCompoundExpression) copy).getChildren().get(0))._value);
+		 * ((AbstractCompoundExpression) original).addSubexpression(_parser.parse("y",
+		 * false));
+		 */
+		assertNotEquals(((AbstractCompoundExpression) original).getChildren(),
+				((AbstractCompoundExpression) copy).getChildren()); // children shouldn't have same reference
+		assertNotEquals(((AbstractCompoundExpression) original).getChildren().get(0),
+				((AbstractCompoundExpression) copy).getChildren().get(0)); // specific child shouldn't have same reference
 		((AbstractCompoundExpression) original).addSubexpression(_parser.parse("y", false));
 		assertNotEquals(((AbstractCompoundExpression) original).getChildren().size(),
-				((AbstractCompoundExpression) copy).getChildren().size());
-		// adding children to one shouldn't add it to another
+				((AbstractCompoundExpression) copy).getChildren().size()); // adding children to one shouldn't add it to
+																			// another
 	}
 
 }
