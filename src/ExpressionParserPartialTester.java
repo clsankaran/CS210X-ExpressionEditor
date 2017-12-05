@@ -95,6 +95,24 @@ public class ExpressionParserPartialTester {
 		_parser.parse(expressionStr, false);
 	}
 
+	@Test(expected = ExpressionParseException.class)
+	/**
+	 * Verifies that a specific expression is parsed into the correct parse tree.
+	 */
+	public void testException4() throws ExpressionParseException {
+		final String expressionStr = "(((";
+		_parser.parse(expressionStr, false);
+	}
+
+	@Test(expected = ExpressionParseException.class)
+	/**
+	 * Verifies that a specific expression is parsed into the correct parse tree.
+	 */
+	public void testException5() throws ExpressionParseException {
+		final String expressionStr = "(2*x)+5*y*z+(x+)";
+		_parser.parse(expressionStr, false);
+	}
+
 	@Test
 	/**
 	 * Verifies that a specific expression is parsed into the correct parse tree.
@@ -103,6 +121,23 @@ public class ExpressionParserPartialTester {
 		final String expressionStr = "a+b";
 		final String parseTreeStr = "+\n\ta\n\tb\n";
 		assertEquals(parseTreeStr, _parser.parse(expressionStr, false).convertToString(0).replace('*', '·'));
+	}
+
+	@Test
+	/**
+	 * Verifies that deep copy works.
+	 */
+	public void deepCopy() throws ExpressionParseException {
+		final String expressionStr = "4*(z+5*x)";
+		final String parseTreeStr = "·\n\t4\n\t()\n\t\t+\n\t\t\tz\n\t\t\t·\n\t\t\t\t5\n\t\t\t\tx\n";
+		final Expression original = _parser.parse(expressionStr, false);
+		final Expression copy = original.deepCopy();
+		assertEquals(parseTreeStr, _parser.parse(expressionStr, false).convertToString(0).replace('*', '·'));
+		assertNotEquals(original, copy); // copy and original shouldn't have same reference
+		((AbstractCompoundExpression) original).addSubexpression(_parser.parse("y", false));
+		assertNotEquals(((AbstractCompoundExpression) original).getChildren().size(),
+				((AbstractCompoundExpression) copy).getChildren().size());
+		// adding children to one shouldn't add it to another
 	}
 
 }
