@@ -5,11 +5,19 @@ public class SimpleCompoundExpression extends AbstractCompoundExpression {
 	// instance variable
 	private String _operation;
 
+	/**
+	 * Constructor for SimpleCompoundExpressions
+	 *
+	 * @param operation the operation (* or +)
+	 */
 	public SimpleCompoundExpression(String operation) {
 		super();
 		_operation = operation;
 	}
 
+	/**
+	 * Method that flattens the expression tree.
+	 */
 	public void flatten() {
         ArrayList<Expression> toAdd = new ArrayList<Expression>();
 		for (Expression e : this.getChildren()) {
@@ -32,6 +40,11 @@ public class SimpleCompoundExpression extends AbstractCompoundExpression {
 		}
 	}
 
+	/**
+	 * Method that converts the expression tree into a String
+	 *
+	 * @param indentLevel the number of times the operation should be indented
+	 */
 	@Override
 	public String convertToString(int indentLevel) {
 		String converted = _operation;
@@ -45,6 +58,9 @@ public class SimpleCompoundExpression extends AbstractCompoundExpression {
 		return (converted);
 	}
 
+	/**
+	 * Method that creates a deep copy of this expression
+	 */
 	public Expression deepCopy() {
 		final Expression copy = new SimpleCompoundExpression(_operation);
 		for (Expression e : this.getChildren()) {

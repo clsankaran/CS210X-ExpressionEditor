@@ -1,15 +1,26 @@
 public class ParentheticalExpression extends AbstractCompoundExpression {
 
+	/**
+	 * Method that flattens the expression tree.
+	 */
 	public void flatten() {
         for (Expression e : this.getChildren()) {
             e.flatten(); // recursively call flatten on children
         }
 	}
 
+	/**
+	 * Constructor for ParentheticalExpressions
+	 */
 	public ParentheticalExpression() {
 		super();
 	}
 
+	/**
+	 * Method that converts the expression tree into a String
+	 *
+	 * @param indentLevel the number of times the operation should be indented
+	 */
 	@Override
 	public String convertToString(int indentLevel) {
 		String converted = "()";
@@ -23,6 +34,9 @@ public class ParentheticalExpression extends AbstractCompoundExpression {
 		return (converted);
 	}
 
+	/**
+	 * Method that creates a deep copy of this expression
+	 */
 	public Expression deepCopy() {
 		final Expression copy = new ParentheticalExpression();
 		for (Expression e : this.getChildren()) {

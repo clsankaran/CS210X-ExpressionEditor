@@ -5,6 +5,9 @@ public abstract class AbstractCompoundExpression implements CompoundExpression {
 	private CompoundExpression _parent;
 	private List<Expression> _children;
 
+	/**
+	 * Constructor for AbstractCompoundExpressions
+	 */
 	protected AbstractCompoundExpression() {
 		_children = new ArrayList<Expression>();
 	}
