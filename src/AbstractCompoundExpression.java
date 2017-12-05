@@ -73,7 +73,7 @@ public abstract class AbstractCompoundExpression implements CompoundExpression {
 		subexpression.setParent(this);
 	}
 
-	public void removeSubexpression(Expression subexpression) {
-		_children.remove(subexpression);
+	public void clearSubexpression() {
+		_children = new ArrayList<Expression>();
 	}
 }

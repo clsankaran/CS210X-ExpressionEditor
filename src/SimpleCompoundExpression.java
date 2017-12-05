@@ -12,7 +12,6 @@ public class SimpleCompoundExpression extends AbstractCompoundExpression {
 
 	public void flatten() {
         ArrayList<Expression> toAdd = new ArrayList<Expression>();
-        ArrayList<SimpleCompoundExpression> toRemove = new ArrayList<SimpleCompoundExpression>();
 		for (Expression e : this.getChildren()) {
 			e.flatten();
 			if (e.getClass() == this.getClass()) {
@@ -20,13 +19,14 @@ public class SimpleCompoundExpression extends AbstractCompoundExpression {
 					for (Expression c : ((SimpleCompoundExpression) e).getChildren()) {
 						toAdd.add(c);
 					}
-					toRemove.add((SimpleCompoundExpression) e);
+				} else {
+					toAdd.add(e);
 				}
+			} else {
+				toAdd.add(e);
 			}
 		}
-		for (SimpleCompoundExpression r : toRemove){
-			this.removeSubexpression(r);
-		}
+		this.clearSubexpression();
 		for (Expression a : toAdd){
 			this.addSubexpression(a);
 		}
