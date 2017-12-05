@@ -13,22 +13,22 @@ public class SimpleCompoundExpression extends AbstractCompoundExpression {
 	public void flatten() {
         ArrayList<Expression> toAdd = new ArrayList<Expression>();
 		for (Expression e : this.getChildren()) {
-			e.flatten();
-			if (e.getClass() == this.getClass()) {
-				if (this._operation.equals(((SimpleCompoundExpression) e)._operation)) {
+			e.flatten(); // recursively call flatten on children
+			if (e.getClass() == this.getClass()) { // Check if children is a SimpleCompoundExpression
+				if (this._operation.equals(((SimpleCompoundExpression) e)._operation)) { // Check if operation of children is the same.
 					for (Expression c : ((SimpleCompoundExpression) e).getChildren()) {
-						toAdd.add(c);
+						toAdd.add(c); // adds children of children with the same operation to toAdd.
 					}
 				} else {
-					toAdd.add(e);
+					toAdd.add(e); // adds the child to toAdd if the operation is different
 				}
 			} else {
-				toAdd.add(e);
+				toAdd.add(e); // adds the child to toAdd if it is of type literal or parenthetical
 			}
 		}
-		this.clearSubexpression();
+		this.clearSubexpression(); // clears subexpressions so that the order will stay the same
 		for (Expression a : toAdd){
-			this.addSubexpression(a);
+			this.addSubexpression(a); // adds all Expressions in toAdd as children of this
 		}
 	}
 
@@ -36,11 +36,11 @@ public class SimpleCompoundExpression extends AbstractCompoundExpression {
 	public String convertToString(int indentLevel) {
 		String converted = _operation;
 		for (int i = 0; i < indentLevel; i++) {
-			converted = "\t" + converted;
+			converted = "\t" + converted; // add specified number of tabs
 		}
-		converted = converted + "\n";
+		converted = converted + "\n"; // add a new line at the end
 		for (Expression e : this.getChildren()) {
-			converted = converted + e.convertToString(indentLevel + 1);
+			converted = converted + e.convertToString(indentLevel + 1); // add children strings recursively
 		}
 		return (converted);
 	}

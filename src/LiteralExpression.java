@@ -69,9 +69,9 @@ public class LiteralExpression implements Expression {
 	public String convertToString(int indentLevel) {
 		String converted = _value;
 		for (int i = 0; i < indentLevel; i++) {
-			converted = "\t" + converted;
+			converted = "\t" + converted; // add specified number of tabs
 		}
-		converted = converted + "\n";
+		converted = converted + "\n"; // add a new line at the end
 		return (converted);
 	}
 

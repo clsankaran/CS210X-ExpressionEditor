@@ -68,11 +68,20 @@ public abstract class AbstractCompoundExpression implements CompoundExpression {
 	 */
 	public abstract String convertToString(int indentLevel);
 
+	/**
+	 * Adds the specified expression as a child.
+	 *
+	 * @param subexpression
+	 *            the child expression to add
+	 */
 	public void addSubexpression(Expression subexpression) {
 		_children.add(subexpression);
 		subexpression.setParent(this);
 	}
 
+	/**
+	 * Clears all subexpressions from this Expression.
+	 */
 	public void clearSubexpression() {
 		_children = new ArrayList<Expression>();
 	}
