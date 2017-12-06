@@ -162,6 +162,33 @@ public class ExpressionParserPartialTester {
 		final String expressionStr = "(2*x)+5*y*z+(x+)";
 		_parser.parse(expressionStr, false);
 	}
+	
+	@Test(expected = ExpressionParseException.class)
+	/**
+	 * Verifies that a specific expression correctly throws an error.
+	 */
+	public void testException6() throws ExpressionParseException {
+		final String expressionStr = "A";
+		_parser.parse(expressionStr, false);
+	}
+	
+	@Test(expected = ExpressionParseException.class)
+	/**
+	 * Verifies that a specific expression correctly throws an error.
+	 */
+	public void testException7() throws ExpressionParseException {
+		final String expressionStr = "ab";
+		_parser.parse(expressionStr, false);
+	}
+	
+	@Test(expected = ExpressionParseException.class)
+	/**
+	 * Verifies that a specific expression correctly throws an error.
+	 */
+	public void testException8() throws ExpressionParseException {
+		final String expressionStr = "2a";
+		_parser.parse(expressionStr, false);
+	}
 
 	@Test
 	/**
