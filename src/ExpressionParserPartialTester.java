@@ -54,7 +54,6 @@ public class ExpressionParserPartialTester {
 	 */
 	public void testExpression6() throws ExpressionParseException {
 		final String expressionStr = "(2*x+5)*((x+2*y))";
-		System.out.println(_parser.parse(expressionStr, false).convertToString(0));
 		final String parseTreeStr = "·\n\t()\n\t\t+\n\t\t\t·\n\t\t\t\t2\n\t\t\t\tx\n\t\t\t5\n\t()\n\t\t()\n\t\t\t+\n\t\t\t\tx\n\t\t\t\t·\n\t\t\t\t\t2\n\t\t\t\t\ty\n";
 		assertEquals(parseTreeStr, _parser.parse(expressionStr, false).convertToString(0).replace('*', '·'));
 	}
