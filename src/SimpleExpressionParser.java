@@ -1,4 +1,7 @@
 /**
+ * 
+ * An implementation of ExpressionParser
+ * 
  * Starter code to implement an ExpressionParser. Your parser methods should use
  * the following grammar: E := A | X A := A+M | M M := M*M | X X := (E) | L L :=
  * [0-9]+ | [a-z]
@@ -31,19 +34,34 @@ public class SimpleExpressionParser implements ExpressionParser {
 		return expression;
 	}
 
+	/**
+	 * Parses the string
+	 * @param str the string to be parsed
+	 * @return the parsed expression
+	 */
 	private Expression parseExpression(String str) {
 		return parseE(str);
 	}
 
+	/**
+	 * Parses the E string using the rule E -> A | X
+	 * @param str the E string to be parsed
+	 * @return the expression if it can be parsed, null otherwise
+	 */
 	private Expression parseE(String str) {
-		if (parseA(str) != null) {
+		if (parseA(str) != null) { // if it can be parsed as an A
 			return parseA(str);
-		} else if (parseX(str) != null) {
+		} else if (parseX(str) != null) { // if it can be parsed as an X
 			return parseX(str);
 		}
 		return null;
 	}
 
+	/**
+	 * Parses the A string using the rule A -> A + M | M
+	 * @param str the A string to be parsed
+	 * @return the expression if it can be parsed, null otherwise
+	 */
 	private Expression parseA(String str) {
 		// try A + M
 		int idxOfPlus = str.indexOf('+');
@@ -63,6 +81,11 @@ public class SimpleExpressionParser implements ExpressionParser {
 		return null;
 	}
 
+	/**
+	 * Parses the M string using the rule M -> M * M | X
+	 * @param str the M string to be parsed
+	 * @return the parsed expression if it can be parsed, null otherwise
+	 */
 	private Expression parseM(String str) {
 		// try M * M
 		int idxOfTimes = str.indexOf('*');
@@ -73,7 +96,7 @@ public class SimpleExpressionParser implements ExpressionParser {
 				((AbstractCompoundExpression) result).addSubexpression(parseM(str.substring(idxOfTimes + 1)));
 				return result;
 			}
-			idxOfTimes = str.indexOf('+', idxOfTimes + 1);
+			idxOfTimes = str.indexOf('*', idxOfTimes + 1);
 		}
 		// try X
 		if (parseX(str) != null) {
@@ -82,6 +105,11 @@ public class SimpleExpressionParser implements ExpressionParser {
 		return null;
 	}
 
+	/**
+	 * Parses the X string using the rule X -> (E) | L
+	 * @param str the X string to be parsed
+	 * @return the parsed expression if it can be parsed, null otherwise
+	 */
 	private Expression parseX(String str) {
 		// try (E)
 		if (str.startsWith("(") && str.endsWith(")") && parseE(str.substring(1, str.length() - 1)) != null) {
@@ -95,7 +123,12 @@ public class SimpleExpressionParser implements ExpressionParser {
 		}
 		return null;
 	}
-
+	
+	/**
+	 * Parses the L string using the rule L -> [0-9]+ | [a-z]
+	 * @param str the L string to be parsed
+	 * @return the parsed expression if it can be parsed, null otherwise
+	 */
 	private Expression parseL(String str) {
 		// try [0-9]+
 		try {

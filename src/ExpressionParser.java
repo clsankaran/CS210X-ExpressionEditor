@@ -1,3 +1,6 @@
+/*
+ * Parses an expression
+ */
 interface ExpressionParser {
 	/**
 	 * Attempts to create an expression tree -- flattened as much as possible --

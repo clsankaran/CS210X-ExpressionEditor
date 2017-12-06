@@ -1,3 +1,8 @@
+/**
+ * 
+ * An expression that has a literal value -> [0-9]+ | [a-z]
+ *
+ */
 public class LiteralExpression implements Expression {
 
 	// instance variables

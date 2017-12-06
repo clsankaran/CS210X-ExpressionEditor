@@ -1,14 +1,20 @@
 import java.util.ArrayList;
 
+/**
+ * 
+ * An additive or multiplicative expression
+ *
+ */
 public class SimpleCompoundExpression extends AbstractCompoundExpression {
 
 	// instance variable
 	private String _operation;
 
 	/**
-	 * Constructor for SimpleCompoundExpressions
+	 * Constructor for SimpleCompoundExpression
 	 *
-	 * @param operation the operation (* or +)
+	 * @param operation
+	 *            the operation (* or +)
 	 */
 	public SimpleCompoundExpression(String operation) {
 		super();
@@ -19,11 +25,12 @@ public class SimpleCompoundExpression extends AbstractCompoundExpression {
 	 * Method that flattens the expression tree.
 	 */
 	public void flatten() {
-        final ArrayList<Expression> toAdd = new ArrayList<Expression>();
+		final ArrayList<Expression> toAdd = new ArrayList<Expression>();
 		for (Expression e : this.getChildren()) {
 			e.flatten(); // recursively call flatten on children
 			if (e.getClass() == this.getClass()) { // Check if children is a SimpleCompoundExpression
-				if (this._operation.equals(((SimpleCompoundExpression) e)._operation)) { // Check if operation of children is the same.
+				if (this._operation.equals(((SimpleCompoundExpression) e)._operation)) { // Check if operation of
+																							// children is the same.
 					for (Expression c : ((SimpleCompoundExpression) e).getChildren()) {
 						toAdd.add(c); // adds children of children with the same operation to toAdd.
 					}
@@ -35,7 +42,7 @@ public class SimpleCompoundExpression extends AbstractCompoundExpression {
 			}
 		}
 		this.clearSubexpression(); // clears subexpressions so that the order will stay the same
-		for (Expression a : toAdd){
+		for (Expression a : toAdd) {
 			this.addSubexpression(a); // adds all Expressions in toAdd as children of this
 		}
 	}
@@ -43,7 +50,9 @@ public class SimpleCompoundExpression extends AbstractCompoundExpression {
 	/**
 	 * Method that converts the expression tree into a String
 	 *
-	 * @param indentLevel the number of times the operation should be indented
+	 * @param indentLevel
+	 *            the number of times the operation should be indented
+	 * @return the string representation of the expression
 	 */
 	@Override
 	public String convertToString(int indentLevel) {
@@ -60,6 +69,8 @@ public class SimpleCompoundExpression extends AbstractCompoundExpression {
 
 	/**
 	 * Method that creates a deep copy of this expression
+	 * 
+	 * @return the copied expression
 	 */
 	public Expression deepCopy() {
 		final Expression copy = new SimpleCompoundExpression(_operation);

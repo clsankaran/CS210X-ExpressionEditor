@@ -1,3 +1,8 @@
+/**
+ * 
+ * Highest level of expression
+ *
+ */
 interface Expression {
 	/**
 	 * Returns the expression's parent.

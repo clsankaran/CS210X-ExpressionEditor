@@ -1,5 +1,9 @@
 import java.util.*;
-
+/**
+ * 
+ * Common code in all types of compound expressions
+ *
+ */
 public abstract class AbstractCompoundExpression implements CompoundExpression {
 
 	private CompoundExpression _parent;
@@ -22,9 +26,9 @@ public abstract class AbstractCompoundExpression implements CompoundExpression {
 	}
 
 	/**
-	 * Returns the expression's parent.
+	 * Returns the expression's list of children.
 	 * 
-	 * @return the expression's parent
+	 * @return the expression's list of children
 	 */
 	public List<Expression> getChildren() {
 		return _children;

@@ -1,3 +1,6 @@
+/**
+ * An expression with children
+ */
 interface CompoundExpression extends Expression {
 	/**
 	 * Adds the specified expression as a child.

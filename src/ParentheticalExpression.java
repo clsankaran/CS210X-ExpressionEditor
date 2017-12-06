@@ -1,3 +1,8 @@
+/**
+ * 
+ * An expression that is enclosed by parenthesis.
+ *
+ */
 public class ParentheticalExpression extends AbstractCompoundExpression {
 
 	/**
@@ -20,6 +25,7 @@ public class ParentheticalExpression extends AbstractCompoundExpression {
 	 * Method that converts the expression tree into a String
 	 *
 	 * @param indentLevel the number of times the operation should be indented
+	 * @return the string representation of the expression
 	 */
 	@Override
 	public String convertToString(int indentLevel) {
@@ -36,6 +42,7 @@ public class ParentheticalExpression extends AbstractCompoundExpression {
 
 	/**
 	 * Method that creates a deep copy of this expression
+	 * @return the copied expression
 	 */
 	public Expression deepCopy() {
 		final Expression copy = new ParentheticalExpression();
